@@ -1,0 +1,47 @@
+buildscript {
+	ext {
+		flywayVersion = "6.5.7"
+	}
+}
+
+
+plugins {
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+//	id "org.flywaydb.flyway" version "6.5.7"
+}
+
+group = 'com.finnick'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.h2database:h2'
+//	implementation 'org.flywaydb:flyway-core:6.5.7'
+	runtimeOnly 'org.postgresql:postgresql'
+	compile "org.mapstruct:mapstruct:1.4.0.Beta1"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.0.Beta1"
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	compile "org.springframework.boot:spring-boot-devtools"
+}
+
+test {
+	useJUnitPlatform()
+}
